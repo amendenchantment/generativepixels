@@ -2,14 +2,13 @@ from PIL import Image
 import math
 from random import random
 
-global square_width;
 
-# def hash(seed: int) -> int:
-    # # return int(tanh(seed*seed) * randint(0, 255) * random()**0.5)
-    # result: int = (round(math.gcd(seed, 2)**2 * random()) % 256) * 64 
-    # print(result)
-    # return result
-    # if 
+global square_width
+
+def hash(seed: int) -> int:
+    # return int(tanh(seed*seed) * randint(0, 255) * random()**0.5)
+    result: int = (round(math.gcd(seed, 2)**2 * random()) % 256) * 64 
+    return result
 
 def color_pixel() -> list[int]:
     return [round(255 * random()), round(255 * random()), round(255 * random())]
@@ -31,8 +30,7 @@ def gen_pixel(pixel: list[int]) -> list[int]:
     except ValueError:
         return [0, 0, 0]
 
-
-def create_image(seed: int):
+def create_image():
     global square_width
     square_width = 2**7 - 1 
     img = Image.new('RGB', (square_width, square_width), "white")
@@ -48,7 +46,6 @@ def create_image(seed: int):
     file_name: str = f"/Users/anshmendiratta/Code/generativepixels/images/image{current_counter}.png"
     img.save(file_name)
 
-     
 def increment_counter() -> int:
     with open("counter.txt", "r+") as file:
         current_count = int(file.readline().strip('\x00'))
@@ -62,6 +59,6 @@ def get_counter() -> int:
         return int(file.readline().strip('\x00'))
 
 def main() -> None:
-    create_image(123456434)
+    create_image()
 
 main() 
